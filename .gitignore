@@ -1,0 +1,78 @@
+### --- IDE i System --- ###
+.DS_Store
+Thumbs.db
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+*.iml
+
+### --- Backend (Java & Maven) --- ###
+# Ignorujemy folder 'target', gdzie lądują zbudowane pliki .jar i .class
+**/target/
+# Folder 'out' czasem generowany przez IntelliJ
+**/out/
+
+# Logi aplikacji
+*.log
+
+# Pliki tymczasowe Eclipse (jeśli ktoś z zespołu by używał)
+.classpath
+.project
+.settings/
+
+### --- Bezpieczeństwo (Secrets) --- ###
+# Ważne! Tu wpisujemy pliki z hasłami, których nie chcemy na GitHubie
+.env
+# local.properties często zawiera ścieżki do SDK w Androidzie
+local.properties
+
+### --- Mobile (Na przyszłość dla Androida/Kotlin) --- ###
+# Folder budowania Gradle
+**/build/
+.gradle/
+# Pliki generowane przez Android Studio
+captures/
+.externalNativeBuild/
+.cxx/
+
+### --- Wyjątki (Co CHCEMY trzymać) --- ###
+# Chcemy trzymać wrapper Mavena, żeby każdy mógł zbudować projekt
+!mvnw
+!mvnw.cmd
+!.mvn/wrapper/maven-wrapper.properties
+
+HELP.md
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
