@@ -5,6 +5,7 @@ import io.github.garnaalpak.backend.dto.DeleteWatchlistDto;
 import io.github.garnaalpak.backend.dto.EditStatusWatchlistDto;
 import io.github.garnaalpak.backend.models.Watchlist;
 import io.github.garnaalpak.backend.services.IWatchlistService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,31 +16,31 @@ import java.util.Collection;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/watchlist")
-class WatchListController {
+public class WatchListController {
     private final IWatchlistService watchlistService;
 
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<Collection<Watchlist>> getAllList()
     {
         return ResponseEntity.ok(watchlistService.getAllWatchlist());
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<String> addToWatchlist(@RequestBody AddWatchlistDto request) {
+    @PostMapping
+    public ResponseEntity<String> addToWatchlist(@Valid @RequestBody AddWatchlistDto request) {
         watchlistService.addToWatchList(request);
         return ResponseEntity.ok("Dodano do listy");
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<String> deleteFromWatchlist(@RequestBody DeleteWatchlistDto request) {
+    @DeleteMapping
+    public ResponseEntity<String> deleteFromWatchlist(@Valid @RequestBody DeleteWatchlistDto request) {
         watchlistService.deleteFromWatchList(request);
         return ResponseEntity.ok("Usunięto z listy");
     }
 
 
-    @PatchMapping("/status")
-    public ResponseEntity<String> changeStatus(@RequestBody EditStatusWatchlistDto request) {
+    @PatchMapping
+    public ResponseEntity<String> changeStatus(@Valid @RequestBody EditStatusWatchlistDto request) {
         watchlistService.changeStatus(request);
         return ResponseEntity.ok("Status zaktualizowany");
     }
