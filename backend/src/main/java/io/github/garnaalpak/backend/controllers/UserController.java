@@ -2,6 +2,7 @@ package io.github.garnaalpak.backend.controllers;
 
 import io.github.garnaalpak.backend.models.User;
 import io.github.garnaalpak.backend.services.IUserService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +18,7 @@ class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping("/all")
+    @GetMapping("/all")
     public Collection<User> getAllUsers(){
         return userService.getAllUsers();
     }

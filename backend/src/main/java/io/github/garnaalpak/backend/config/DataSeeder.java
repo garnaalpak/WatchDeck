@@ -17,11 +17,8 @@ public class DataSeeder implements CommandLineRunner {
     private final UserRoleRepository roleRepository;
     private final UserRepository userRepository;
 
-    //todo
-    //to security
-//    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    @Override
     public void run(String... args) throws Exception {
         // 1. Tworzenie Ról
         createRoleIfNotFound("ROLE_USER");
@@ -35,7 +32,8 @@ public class DataSeeder implements CommandLineRunner {
             User admin = User.builder()
                     .username("admin")
                     .email("admin@watchdeck.com")
-//                    .password(passwordEncoder.encode("admin"))
+                    .firstname("Jakub")
+                    .password(passwordEncoder.encode("admin"))
                     .password("admin")
                     .role(adminRole)
                     .build();

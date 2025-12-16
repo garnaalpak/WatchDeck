@@ -23,6 +23,10 @@ public class User implements UserDetails {
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    @Column(name = "firstname", nullable = false)
+    private String firstname;
+
+
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 
