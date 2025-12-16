@@ -12,7 +12,6 @@ import java.util.Collection;
 class UserService implements IUserService {
 
     private final UserRepository userRepository;
-    private final UserRepository roleRepository;
 
     @Override
     public Collection<User> getAllUsers()

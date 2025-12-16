@@ -1,7 +1,6 @@
 package io.github.garnaalpak.backend.services;
 
 import io.github.garnaalpak.backend.dto.AddWatchlistDto;
-import io.github.garnaalpak.backend.dto.DeleteWatchlistDto;
 import io.github.garnaalpak.backend.dto.EditStatusWatchlistDto;
 import io.github.garnaalpak.backend.models.Watchlist;
 
@@ -12,7 +11,7 @@ public interface IWatchlistService {
 
     void addToWatchList(AddWatchlistDto watchlistDto);
 
-    void deleteFromWatchList(DeleteWatchlistDto deleteWatchlistDto);
+    void deleteFromWatchList(String tmdbId, String mediaType);
 
     void changeStatus(EditStatusWatchlistDto request);
 }

@@ -1,7 +1,6 @@
 package io.github.garnaalpak.backend.services;
 
 import io.github.garnaalpak.backend.dto.AddWatchlistDto;
-import io.github.garnaalpak.backend.dto.DeleteWatchlistDto;
 import io.github.garnaalpak.backend.dto.EditStatusWatchlistDto;
 import io.github.garnaalpak.backend.exceptions.BadRequestException;
 import io.github.garnaalpak.backend.exceptions.NotFoundException;
@@ -58,15 +57,15 @@ public class WatchlistService implements IWatchlistService {
 
     }
     @Override
-    public void deleteFromWatchList(DeleteWatchlistDto deleteWatchlistDto)
+    public void deleteFromWatchList(String tmdbId, String mediaTypeName)
     {
         User user = getCurrentUser();
 
-        if (!watchlistRepository.existsByUserIdAndTmdbIdAndMediaType_Name(user.getId(), deleteWatchlistDto.getTmdbId(), deleteWatchlistDto.getMediaTypeName())) {
+        if (!watchlistRepository.existsByUserIdAndTmdbIdAndMediaType_Name(user.getId(), tmdbId, mediaTypeName)) {
             throw new BadRequestException("Ten film nie jest na Twojej liście!");
         }
 
-        watchlistRepository.deleteByTmdbIdAndUserIdAndMediaType_Name(deleteWatchlistDto.getTmdbId(), user.getId(), deleteWatchlistDto.getMediaTypeName());
+        watchlistRepository.deleteByTmdbIdAndUserIdAndMediaType_Name(tmdbId, user.getId(), mediaTypeName);
     }
 
     @Override

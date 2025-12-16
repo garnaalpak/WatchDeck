@@ -47,7 +47,6 @@ public class DataSeeder implements CommandLineRunner {
                     .email("admin@watchdeck.com")
                     .firstname("Jakub")
                     .password(passwordEncoder.encode("admin"))
-                    .password("admin")
                     .role(adminRole)
                     .build();
 

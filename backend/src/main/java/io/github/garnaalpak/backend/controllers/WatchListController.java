@@ -1,7 +1,6 @@
 package io.github.garnaalpak.backend.controllers;
 
 import io.github.garnaalpak.backend.dto.AddWatchlistDto;
-import io.github.garnaalpak.backend.dto.DeleteWatchlistDto;
 import io.github.garnaalpak.backend.dto.EditStatusWatchlistDto;
 import io.github.garnaalpak.backend.models.Watchlist;
 import io.github.garnaalpak.backend.services.IWatchlistService;
@@ -33,8 +32,11 @@ public class WatchListController {
     }
 
     @DeleteMapping
-    public ResponseEntity<String> deleteFromWatchlist(@Valid @RequestBody DeleteWatchlistDto request) {
-        watchlistService.deleteFromWatchList(request);
+    public ResponseEntity<String> deleteFromWatchlist(
+            @RequestParam String tmdbId,
+            @RequestParam String mediaType
+    ) {
+        watchlistService.deleteFromWatchList(tmdbId, mediaType);
         return ResponseEntity.ok("Usunięto z listy");
     }
 
