@@ -1,13 +1,11 @@
 package io.github.garnaalpak.backend.services;
 
-import io.github.garnaalpak.backend.controllers.AuthenticationResponse;
-import io.github.garnaalpak.backend.controllers.RegisterRequest;
+import io.github.garnaalpak.backend.dto.AuthenticationResponseDto;
+import io.github.garnaalpak.backend.dto.RegisterRequestDto;
 import io.github.garnaalpak.backend.controllers.AuthenticateRequest;
-import io.github.garnaalpak.backend.exceptions.NotFoundException;
 import io.github.garnaalpak.backend.models.User;
 import io.github.garnaalpak.backend.repositories.UserRepository;
 import io.github.garnaalpak.backend.repositories.UserRoleRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.Nullable;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,7 +24,7 @@ public class AuthService {
 
     private final AuthenticationManager authenticationManager;
 
-    public @Nullable AuthenticationResponse register(RegisterRequest request) {
+    public @Nullable AuthenticationResponseDto register(RegisterRequestDto request) {
         var user = User.builder()
                 .username(request.getUsername())
                 .email(request.getEmail())
@@ -39,12 +37,12 @@ public class AuthService {
         userRepository.save(user);
 
         var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder()
+        return AuthenticationResponseDto.builder()
                 .token(jwtToken)
                 .build();
     }
 
-    public @Nullable AuthenticationResponse authenticate(AuthenticateRequest request) {
+    public @Nullable AuthenticationResponseDto authenticate(AuthenticateRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getUsername(),
@@ -55,7 +53,7 @@ public class AuthService {
         var user = userRepository.findByUsername(request.getUsername())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder()
+        return AuthenticationResponseDto.builder()
                 .token(jwtToken)
                 .build();
 

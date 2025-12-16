@@ -20,11 +20,9 @@ public class DataSeeder implements CommandLineRunner {
     private final PasswordEncoder passwordEncoder;
 
     public void run(String... args) throws Exception {
-        // 1. Tworzenie Ról
         createRoleIfNotFound("ROLE_USER");
         createRoleIfNotFound("ROLE_ADMIN");
 
-        // 2. Tworzenie Admina
         if (!userRepository.existsByUsername("admin")) {
             UserRole adminRole = roleRepository.findByName("ROLE_ADMIN")
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));

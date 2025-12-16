@@ -1,4 +1,4 @@
-package io.github.garnaalpak.backend.controllers;
+package io.github.garnaalpak.backend.dto;
 
 
 import lombok.*;
@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class RegisterRequest {
+public class RegisterRequestDto {
 
     private String firstname;
 

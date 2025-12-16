@@ -1,8 +1,9 @@
 package io.github.garnaalpak.backend.controllers;
 
+import io.github.garnaalpak.backend.dto.AuthenticationResponseDto;
+import io.github.garnaalpak.backend.dto.RegisterRequestDto;
 import io.github.garnaalpak.backend.services.AuthService;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,15 +19,15 @@ class AuthController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(
-            @RequestBody RegisterRequest request
+    public ResponseEntity<AuthenticationResponseDto> register(
+            @RequestBody RegisterRequestDto request
     )
     {
         return ResponseEntity.ok(service.register(request));
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> register(
+    public ResponseEntity<AuthenticationResponseDto> register(
             @RequestBody AuthenticateRequest request
     )
     {

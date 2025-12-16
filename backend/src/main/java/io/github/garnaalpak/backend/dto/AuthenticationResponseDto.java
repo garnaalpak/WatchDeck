@@ -1,4 +1,4 @@
-package io.github.garnaalpak.backend.controllers;
+package io.github.garnaalpak.backend.dto;
 
 
 import lombok.*;
@@ -7,7 +7,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationResponse {
+public class AuthenticationResponseDto {
 
     private String token;
 }
