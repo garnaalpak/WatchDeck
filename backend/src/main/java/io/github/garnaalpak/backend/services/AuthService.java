@@ -2,7 +2,7 @@ package io.github.garnaalpak.backend.services;
 
 import io.github.garnaalpak.backend.dto.AuthenticationResponseDto;
 import io.github.garnaalpak.backend.dto.RegisterRequestDto;
-import io.github.garnaalpak.backend.controllers.AuthenticateRequest;
+import io.github.garnaalpak.backend.dto.AuthenticateRequestDto;
 import io.github.garnaalpak.backend.models.User;
 import io.github.garnaalpak.backend.repositories.UserRepository;
 import io.github.garnaalpak.backend.repositories.UserRoleRepository;
@@ -42,7 +42,7 @@ public class AuthService {
                 .build();
     }
 
-    public @Nullable AuthenticationResponseDto authenticate(AuthenticateRequest request) {
+    public @Nullable AuthenticationResponseDto authenticate(AuthenticateRequestDto request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getUsername(),

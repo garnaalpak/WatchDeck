@@ -1,5 +1,6 @@
 package io.github.garnaalpak.backend.controllers;
 
+import io.github.garnaalpak.backend.dto.AuthenticateRequestDto;
 import io.github.garnaalpak.backend.dto.AuthenticationResponseDto;
 import io.github.garnaalpak.backend.dto.RegisterRequestDto;
 import io.github.garnaalpak.backend.services.AuthService;
@@ -28,7 +29,7 @@ class AuthController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponseDto> register(
-            @RequestBody AuthenticateRequest request
+            @RequestBody AuthenticateRequestDto request
     )
     {
         return ResponseEntity.ok(service.authenticate(request));
