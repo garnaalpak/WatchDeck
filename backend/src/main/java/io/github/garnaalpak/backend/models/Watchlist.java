@@ -1,12 +1,14 @@
 package io.github.garnaalpak.backend.models;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@Builder
+@NoArgsConstructor
 @Table(name = "watchlist")
 public class Watchlist {
     @Id
