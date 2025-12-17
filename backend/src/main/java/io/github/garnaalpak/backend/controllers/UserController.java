@@ -1,7 +1,10 @@
 package io.github.garnaalpak.backend.controllers;
 
+import io.github.garnaalpak.backend.dto.UserDto;
 import io.github.garnaalpak.backend.models.User;
 import io.github.garnaalpak.backend.services.IUserService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,8 +21,9 @@ class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/all")
-    public Collection<User> getAllUsers(){
-        return userService.getAllUsers();
+    @GetMapping("/me")
+    public ResponseEntity<UserDto> getCurrentUser()
+    {
+        return ResponseEntity.ok(userService.getCurrentUserDto());
     }
 }

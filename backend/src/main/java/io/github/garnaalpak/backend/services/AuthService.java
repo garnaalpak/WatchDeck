@@ -3,6 +3,7 @@ package io.github.garnaalpak.backend.services;
 import io.github.garnaalpak.backend.dto.AuthenticationResponseDto;
 import io.github.garnaalpak.backend.dto.RegisterRequestDto;
 import io.github.garnaalpak.backend.dto.AuthenticateRequestDto;
+import io.github.garnaalpak.backend.exceptions.ConflictException;
 import io.github.garnaalpak.backend.models.User;
 import io.github.garnaalpak.backend.repositories.UserRepository;
 import io.github.garnaalpak.backend.repositories.UserRoleRepository;
@@ -25,6 +26,13 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
 
     public @Nullable AuthenticationResponseDto register(RegisterRequestDto request) {
+
+        if(userRepository.existsByUsername(request.getUsername()) || userRepository.existsByEmail(request.getEmail()))
+        {
+            throw new ConflictException("User with this username or email already exists");
+        }
+
+
         var user = User.builder()
                 .username(request.getUsername())
                 .email(request.getEmail())
@@ -59,3 +67,12 @@ public class AuthService {
 
     }
 }
+
+//todo importante!!!!!!!!!!!!!!
+//{
+//        "status": 500,
+//        "error": "Internal Server Error",
+//        "message": "Wystąpił nieoczekiwany błąd: could not execute statement [ERROR: duplicate key value violates unique constraint \"uk6dotkott2kjsp8vw4d0m25fb7\"\n  Detail: Key (email)=(jan.st@example.com) already exists.] [insert into users (email,firstname,password,role_id,username) values (?,?,?,?,?)]; SQL [insert into users (email,firstname,password,role_id,username) values (?,?,?,?,?)]; constraint [uk6dotkott2kjsp8vw4d0m25fb7]",
+//        "timestamp": 1766011194515
+//        }
+// to jest jak się rejestruje tym samym mailme lub user

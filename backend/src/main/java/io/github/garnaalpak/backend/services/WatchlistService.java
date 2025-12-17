@@ -2,6 +2,7 @@ package io.github.garnaalpak.backend.services;
 
 import io.github.garnaalpak.backend.dto.AddWatchlistDto;
 import io.github.garnaalpak.backend.dto.EditStatusWatchlistDto;
+import io.github.garnaalpak.backend.dto.WatchlistResponseDto;
 import io.github.garnaalpak.backend.exceptions.BadRequestException;
 import io.github.garnaalpak.backend.exceptions.NotFoundException;
 import io.github.garnaalpak.backend.models.Status;
@@ -27,18 +28,29 @@ public class WatchlistService implements IWatchlistService {
     private final StatusRepository statusRepository;
     private final MediaTypeRepository mediaTypeRepository;
     private final UserRepository userRepository;
+    private final UserService userService;
 
     @Override
-    public Collection<Watchlist> getAllWatchlist()
+    public Collection<WatchlistResponseDto> getAllWatchlist()
     {
-        User user = getCurrentUser();
-        return watchlistRepository.findAllByUserId(user.getId());
+        User user = userService.getCurrentUser();
+
+        return watchlistRepository
+                .findAllByUserId(user.getId())
+                .stream()
+                .map(item -> WatchlistResponseDto.builder()
+                        .statusName(item.getStatus().getName())
+                        .mediaTypeName(item.getMediaType().getName())
+                        .tmdbId(item.getTmdbId())
+                        .rating(item.getRating())
+                        .build())
+                .toList();
     }
 
     @Override
     public void addToWatchList(AddWatchlistDto watchlistDto)
     {
-        User user = getCurrentUser();
+        User user = userService.getCurrentUser();
 
         if (watchlistRepository.existsByUserIdAndTmdbIdAndMediaType_Name(user.getId(), watchlistDto.getTmdbId(), watchlistDto.getMediaType())) {
             throw new BadRequestException("Ten " + watchlistDto.getMediaType() + " jest już na Twojej liście!");
@@ -59,7 +71,7 @@ public class WatchlistService implements IWatchlistService {
     @Override
     public void deleteFromWatchList(String tmdbId, String mediaTypeName)
     {
-        User user = getCurrentUser();
+        User user = userService.getCurrentUser();
 
         if (!watchlistRepository.existsByUserIdAndTmdbIdAndMediaType_Name(user.getId(), tmdbId, mediaTypeName)) {
             throw new BadRequestException("Ten film nie jest na Twojej liście!");
@@ -71,7 +83,7 @@ public class WatchlistService implements IWatchlistService {
     @Override
     public void changeStatus(EditStatusWatchlistDto request)
     {
-        User user = getCurrentUser();
+        User user = userService.getCurrentUser();
 
         Watchlist item = watchlistRepository.findByUserIdAndTmdbIdAndMediaType_Name(
                 user.getId(),
@@ -84,12 +96,6 @@ public class WatchlistService implements IWatchlistService {
 
         item.setStatus(newStatus);
         watchlistRepository.save(item);
-    }
-
-    private User getCurrentUser() {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return userRepository.findByUsername(username)
-                .orElseThrow(() -> new NotFoundException("User not found"));
     }
 
 }
