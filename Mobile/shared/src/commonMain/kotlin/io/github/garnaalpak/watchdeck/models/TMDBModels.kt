@@ -17,10 +17,10 @@ data class TmdbItem(
     val name: String? = null,
 
     @SerialName("poster_path")
-    val posterPath: String?,
+    val posterPath: String? = null,
 
     @SerialName("vote_average")
-    val voteAverage: Double,
+    val voteAverage: Double? = null,
 
     @SerialName("release_date")
     val releaseDate: String? = null,
@@ -28,7 +28,7 @@ data class TmdbItem(
     @SerialName("first_air_date")
     val firstAirDate: String? = null,
 
-    val overview: String
+    val overview: String? = null
 )
 
 
