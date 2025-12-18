@@ -13,7 +13,6 @@ import io.github.garnaalpak.backend.repositories.StatusRepository;
 import io.github.garnaalpak.backend.repositories.UserRepository;
 import io.github.garnaalpak.backend.repositories.WatchlistRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,8 +30,7 @@ public class WatchlistService implements IWatchlistService {
     private final UserService userService;
 
     @Override
-    public Collection<WatchlistResponseDto> getAllWatchlist()
-    {
+    public Collection<WatchlistResponseDto> getAllWatchlist() {
         User user = userService.getCurrentUser();
 
         return watchlistRepository
@@ -48,8 +46,7 @@ public class WatchlistService implements IWatchlistService {
     }
 
     @Override
-    public void addToWatchList(AddWatchlistDto watchlistDto)
-    {
+    public void addToWatchList(AddWatchlistDto watchlistDto) {
         User user = userService.getCurrentUser();
 
         if (watchlistRepository.existsByUserIdAndTmdbIdAndMediaType_Name(user.getId(), watchlistDto.getTmdbId(), watchlistDto.getMediaType())) {
@@ -68,9 +65,9 @@ public class WatchlistService implements IWatchlistService {
         watchlistRepository.save(watchList);
 
     }
+
     @Override
-    public void deleteFromWatchList(String tmdbId, String mediaTypeName)
-    {
+    public void deleteFromWatchList(String tmdbId, String mediaTypeName) {
         User user = userService.getCurrentUser();
 
         if (!watchlistRepository.existsByUserIdAndTmdbIdAndMediaType_Name(user.getId(), tmdbId, mediaTypeName)) {
@@ -81,8 +78,7 @@ public class WatchlistService implements IWatchlistService {
     }
 
     @Override
-    public void changeStatus(EditStatusWatchlistDto request)
-    {
+    public void changeStatus(EditStatusWatchlistDto request) {
         User user = userService.getCurrentUser();
 
         Watchlist item = watchlistRepository.findByUserIdAndTmdbIdAndMediaType_Name(

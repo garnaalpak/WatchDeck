@@ -3,7 +3,6 @@ package io.github.garnaalpak.backend.services;
 import io.github.garnaalpak.backend.dto.AddWatchlistDto;
 import io.github.garnaalpak.backend.dto.EditStatusWatchlistDto;
 import io.github.garnaalpak.backend.dto.WatchlistResponseDto;
-import io.github.garnaalpak.backend.models.Watchlist;
 
 import java.util.Collection;
 

@@ -35,7 +35,4 @@ public class Watchlist {
     private Double rating;
 
 
-
-
-
 }

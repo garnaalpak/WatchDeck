@@ -4,7 +4,6 @@ import io.github.garnaalpak.backend.dto.AddWatchlistDto;
 import io.github.garnaalpak.backend.dto.EditStatusWatchlistDto;
 import io.github.garnaalpak.backend.dto.SimpleMessegeResponseDto;
 import io.github.garnaalpak.backend.dto.WatchlistResponseDto;
-import io.github.garnaalpak.backend.models.Watchlist;
 import io.github.garnaalpak.backend.services.IWatchlistService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -22,8 +21,7 @@ public class WatchListController {
 
 
     @GetMapping
-    public ResponseEntity<Collection<WatchlistResponseDto>> getAllList()
-    {
+    public ResponseEntity<Collection<WatchlistResponseDto>> getAllList() {
         return ResponseEntity.ok(watchlistService.getAllWatchlist());
     }
 

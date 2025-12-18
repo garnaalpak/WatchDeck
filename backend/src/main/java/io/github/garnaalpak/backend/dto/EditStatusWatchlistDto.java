@@ -1,7 +1,10 @@
 package io.github.garnaalpak.backend.dto;
 
-import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -10,10 +13,12 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 public class EditStatusWatchlistDto implements Serializable {
-    @NotNull
+    @NotBlank(message = "Typ mediów jest wymagany")
     private String mediaTypeName;
-    @NotNull
+
+    @NotBlank(message = "ID TMDB jest wymagane")
     private String tmdbId;
-    @NotNull
+
+    @NotBlank(message = "Status jest wymagany")
     private String status;
 }
