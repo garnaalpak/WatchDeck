@@ -2,7 +2,7 @@ package io.github.garnaalpak.backend.controllers;
 
 import io.github.garnaalpak.backend.dto.AddWatchlistDto;
 import io.github.garnaalpak.backend.dto.EditStatusWatchlistDto;
-import io.github.garnaalpak.backend.dto.SimpleMessegeResponseDto;
+import io.github.garnaalpak.backend.dto.SimpleMessageResponseDto;
 import io.github.garnaalpak.backend.dto.WatchlistResponseDto;
 import io.github.garnaalpak.backend.services.IWatchlistService;
 import jakarta.validation.Valid;
@@ -26,24 +26,24 @@ public class WatchListController {
     }
 
     @PostMapping
-    public ResponseEntity<SimpleMessegeResponseDto> addToWatchlist(@Valid @RequestBody AddWatchlistDto request) {
+    public ResponseEntity<SimpleMessageResponseDto> addToWatchlist(@Valid @RequestBody AddWatchlistDto request) {
         watchlistService.addToWatchList(request);
-        return ResponseEntity.ok(new SimpleMessegeResponseDto("Dodano do listy"));
+        return ResponseEntity.ok(new SimpleMessageResponseDto("Dodano do listy"));
     }
 
     @DeleteMapping
-    public ResponseEntity<SimpleMessegeResponseDto> deleteFromWatchlist(
+    public ResponseEntity<SimpleMessageResponseDto> deleteFromWatchlist(
             @RequestParam String tmdbId,
             @RequestParam String mediaType
     ) {
         watchlistService.deleteFromWatchList(tmdbId, mediaType);
-        return ResponseEntity.ok(new SimpleMessegeResponseDto("Usunięto z listy"));
+        return ResponseEntity.ok(new SimpleMessageResponseDto("Usunięto z listy"));
     }
 
 
     @PatchMapping
-    public ResponseEntity<SimpleMessegeResponseDto> changeStatus(@Valid @RequestBody EditStatusWatchlistDto request) {
+    public ResponseEntity<SimpleMessageResponseDto> changeStatus(@Valid @RequestBody EditStatusWatchlistDto request) {
         watchlistService.changeStatus(request);
-        return ResponseEntity.ok(new SimpleMessegeResponseDto("Status zaktualizowany"));
+        return ResponseEntity.ok(new SimpleMessageResponseDto("Status zaktualizowany"));
     }
 }
